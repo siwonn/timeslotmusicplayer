@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>timeslotmusicplayer</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com"> 
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+	<style>
+		html{font-family: 'Space Grotesk', sans-serif;}
+		#bigtitle{
+		text-align:center;
+		padding: 100px;
+		}
+		#content{
+			width:  600px;
+			padding-top: 50px;
+			margin: auto;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			place-items:  center;
+			text-align: center;
+		}
+		#dawn{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		#dawnImg{
+			margin: auto;
+			width: 80px;
+			margin: 30px;
+		}
+		#day{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		#dayImg{
+			margin: auto;
+			width: 80px;
+			margin: 30px;
+		}
+		#night{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		#nightImg{
+			margin: auto;
+			width: 80px;
+			margin: 30px;
+		}
+
+.slidecontainer {
+  width: 100%;
+	}
+
+.slider {
+  -webkit-appearance: none; 
+  appearance: none;
+  width: 100%; 
+  height: 2px; 
+  background: #3F4041; 
+  outline: none; 
+  opacity: 0.7; 
+  -webkit-transition: .2s; 
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 0;
+  background: url('star.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border: 0;
+  background: url('star.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+
+h1{
+	color: #4AB7FF;
+}
+
+a{font-size: 1em;
+color: white}
+
+	</style>
+
+</head>
+<body style="background-color: #191919;">
+	<header>
+		<div id="bigtitle" style="font-size: 30px; margin-top: 20px; padding-top: 150px;padding-bottom: 40px;" ><h1>Time slot Music Player</h1></div>
+	</header>
+	<section style="margin-bottom: 320px;">
+	<div id="content">
+	<div id="dawn">
+		<a>dawn time</a>
+		<img id="dawnImg" src="dawntime.png">
+		<audio id="dawnSnd" src="dawnsong.mp3"></audio>
+		<div class="slidecontainer">
+			<input id="dawnVol" class="slider" type="range" max="50" min="0">
+		</div>
+	</div>
+	<div id="day">
+		<a>day time</a>
+		<img id="dayImg" src="daytime.png">
+		<audio id="daySnd" src="daysong.mp3" ></audio>
+		<div class="slidecontainer">
+		<input id="dayVol" class="slider" type="range" max="80" min="0">
+	</div>
+	</div>
+	<div id="night">
+		<a>night time</a>
+		<img id="nightImg" src="nighttime.png">
+		<audio id="nightSnd" src="nightsong.mp3" ></audio>
+		<div class="slidercontainer">
+		<input id="nightVol" class="slider" type="range" max="50" min="0" value="50"></div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+	var stateDawn = false;
+
+
+	dawnVol.value = 50;
+	dawnVol.oninput = function(){
+		dawnSnd.volume = dawnVol.value / 100;
+		console.log(dawnVol.value)
+	}
+
+	dawnImg.onclick = function(){
+		if(stateDawn){
+			dawnImg.src = "dawntime.png";
+			dawnSnd.pause();
+			stateDawn = false;
+		}else{
+			dawnImg.src = "playing.png";
+			dawnSnd.play();
+			stateDawn = true;
+		}
+	}
+
+	var stateDay = false;
+
+	dayVol.value = 80;
+	dayVol.oninput = function(){
+		daySnd.volume = dayVol.value / 100;
+	}
+
+	dayImg.onclick = function(){
+		if(stateDay){
+			dayImg.src = "daytime.png";
+			daySnd.pause();
+			stateDay = false;
+		}else{
+			dayImg.src = "playing.png";
+			daySnd.play();
+			stateDay = true;
+		}
+	}
+
+	var stateNight = "off";
+
+	nightVol.value = 50;
+	nightVol.oninput = function(){
+		nightSnd.volume = nightVol.value / 100;
+	}
+
+
+	nightImg.onclick = function(){
+		if(stateNight == "off"){
+			nightImg.src = "playing.png";
+			nightSnd.play();
+			stateNight = "on";
+		}else if(stateNight == "on"){
+			nightImg.src = "nighttime.png"
+			nightSnd.pause();
+			stateNight = "off";
+		}
+	}
+
+</script>
+</section>
+<footer style="text-align:center; font-size: 12px; opacity: 0.6;" class="footer"><a>from siwon.p</a></footer>
+
+
+</body>
+</html>
